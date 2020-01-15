@@ -67,17 +67,7 @@ function samePath(url, path) {
  * @returns {string} Markup of the component.
  */
 class DefaultView extends Component {
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log(nextProps.loading);
-  //   if (nextProps.loading?.get?.loading) {
-  //     console.log('not yet');
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   render() {
-    // console.log('im default view');
     const { content, intl } = this.props;
     const blocksFieldname = getBlocksFieldname(content);
     const blocksLayoutFieldname = getBlocksLayoutFieldname(content);
@@ -89,18 +79,11 @@ class DefaultView extends Component {
         ? true
         : false;
 
-    // console.log(
-    //   'should',
-    //   shouldRenderRoutes,
-    //   this.props.pathname,
-    //   this.props.contentId,
-    // );
-
-    if (shouldRenderRoutes === false) return '';
-
-    // {this.props.contentId} - {this.props.pathname}
     return hasBlocksData(content) ? (
-      <div id="page-document" className="ui container">
+      <div
+        id="page-document"
+        className={`ui container${!shouldRenderRoutes ? ' blurred' : ''}`}
+      >
         <Helmet title={content.title} />
         {map(content[blocksLayoutFieldname].items, block => {
           const Block =

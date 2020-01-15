@@ -705,3 +705,7 @@ body:not(.has-toolbar-collapsed):not(.anonymous) {
     }
   }
   
+
+  .blurred {
+      filter: blur(5px);
+  }
