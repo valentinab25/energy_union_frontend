@@ -1,6 +1,6 @@
 # Based on https://github.com/plone/volto/blob/master/entrypoint.sh
 
-FROM node:10-jessie
+FROM node:12-stretch
 
 ARG NPM_CONFIG_REGISTRY
 ARG MAX_OLD_SPACE_SIZE=2048
