@@ -19,6 +19,7 @@ import {
   getBaseUrl,
   getLayoutFieldname,
 } from '@plone/volto/helpers';
+import { settings } from '@plone/volto/config';
 import Scrollspy from 'react-scrollspy';
 
 /**
@@ -116,11 +117,13 @@ class View extends Component {
    * @returns {undefined}
    */
   componentWillMount() {
-    this.props.listActions(getBaseUrl(this.props.pathname));
-    this.props.getContent(
-      getBaseUrl(this.props.pathname),
-      this.props.versionId,
-    );
+    // this.props.listActions(getBaseUrl(this.props.pathname));
+    !settings.minimizeNetworkFetch &&
+      this.props.listActions(getBaseUrl(this.props.pathname));
+    // this.props.getContent(
+    //   getBaseUrl(this.props.pathname),
+    //   this.props.versionId,
+    // );
   }
 
   componentDidMount() {
@@ -170,12 +173,15 @@ class View extends Component {
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
+    // if (nextProps.pathname !== this.props.pathname) {
+    //   this.props.listActions(getBaseUrl(nextProps.pathname));
     if (nextProps.pathname !== this.props.pathname) {
-      this.props.listActions(getBaseUrl(nextProps.pathname));
-      this.props.getContent(
-        getBaseUrl(nextProps.pathname),
-        this.props.versionId,
-      );
+      !settings.minimizeNetworkFetch &&
+        this.props.listActions(getBaseUrl(nextProps.pathname));
+      // this.props.getContent(
+      //   getBaseUrl(nextProps.pathname),
+      //   this.props.versionId,
+      // );
     }
 
     if (nextProps.actions.object_buttons) {
@@ -353,7 +359,8 @@ export default compose(
     (state, props) => ({
       actions: state.actions.actions,
       token: state.userSession.token,
-      content: state.content.data,
+      // content: state.content.data,
+      content: state.prefetch[props.location.pathname] || state.content.data,
       error: state.content.get.error,
       pathname: props.location.pathname,
       versionId:

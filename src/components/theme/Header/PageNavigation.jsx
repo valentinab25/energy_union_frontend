@@ -160,9 +160,7 @@ class PageNavigation extends Component {
     const localnavigation =
       (this.props.localnavigation &&
         this.props.localnavigation.length &&
-        this.props.localnavigation.filter(
-          item => item.title !== 'Home',
-        )) ||
+        this.props.localnavigation.filter(item => item.title !== 'Home')) ||
       [];
     console.log('localnavigation', this.props.localnavigation);
     if (!this.props.items || !this.props.items.length) return '';
@@ -456,14 +454,14 @@ class PageNavigation extends Component {
 export default compose(
   injectIntl,
   connect(
-    (state, props) => ({
-      localnavigation:
-        state.content.data &&
-        state.content.data['@components'].localnavigation.items,
-      items:
-        state.content.data &&
-        state.content.data['@components'].navigation.items,
-    }),
+    (state, props) => {
+      const content = state.prefetch[props.pathname] || state.content.data;
+      console.log('nav props', content);
+      return {
+        localnavigation: content?.['@components']?.localnavigation?.items,
+        items: content?.['@components']?.navigation?.items,
+      };
+    },
     {},
   ),
 )(PageNavigation);

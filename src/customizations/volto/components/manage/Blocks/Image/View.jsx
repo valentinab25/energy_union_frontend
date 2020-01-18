@@ -41,7 +41,7 @@ const View = ({ data, detached }) => (
               alt={data.alt || ''}
             />
           );
-          console.log('data in image', data);
+          // console.log('data in image', data);
 
           if (data.href) {
             const isReallyExternal =

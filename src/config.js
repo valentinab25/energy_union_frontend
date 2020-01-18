@@ -32,6 +32,7 @@ const config = [
 
 export const settings = {
   ...config.settings,
+  minimizeNetworkFetch: true,
   contentExpand: [
     ...config.settings.contentExpand.filter(
       content => content !== 'navigation',

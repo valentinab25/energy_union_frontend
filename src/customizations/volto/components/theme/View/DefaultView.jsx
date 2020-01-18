@@ -77,26 +77,26 @@ class DefaultView extends Component {
   // }
 
   render() {
-    // console.log('im default view');
+    console.log('im default view', this.props.pathname);
     const { content, intl } = this.props;
     const blocksFieldname = getBlocksFieldname(content);
     const blocksLayoutFieldname = getBlocksLayoutFieldname(content);
 
-    const currentUrl = this.props.content?.['@id'];
-    const shouldRenderRoutes =
-      typeof currentUrl !== 'undefined' &&
-      samePath(currentUrl, this.props.pathname)
-        ? true
-        : false;
-
-    // console.log(
-    //   'should',
-    //   shouldRenderRoutes,
-    //   this.props.pathname,
-    //   this.props.contentId,
-    // );
-
-    if (shouldRenderRoutes === false) return '';
+    // const currentUrl = this.props.content?.['@id'];
+    // const shouldRenderRoutes =
+    //   typeof currentUrl !== 'undefined' &&
+    //   samePath(currentUrl, this.props.pathname)
+    //     ? true
+    //     : false;
+    //
+    // // console.log(
+    // //   'should',
+    // //   shouldRenderRoutes,
+    // //   this.props.pathname,
+    // //   this.props.contentId,
+    // // );
+    //
+    // if (shouldRenderRoutes === false) return '';
 
     // {this.props.contentId} - {this.props.pathname}
     return hasBlocksData(content) ? (
