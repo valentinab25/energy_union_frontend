@@ -121,6 +121,8 @@ class App extends Component {
     const action = getView(this.props.pathname);
     const hideMenu = this.checkProps(this.props);
 
+    console.log('App path: ', this.props.pathname);
+
     return (
       <Fragment>
         <BodyClass className={`view-${action}view`} />
@@ -260,7 +262,8 @@ export default compose(
   ]),
   connect(
     (state, props) => ({
-      pathname: props.location.pathname,
+      // pathname: props.location.pathname,
+      pathname: state.router.location.pathname,
     }),
     { purgeMessages },
   ),

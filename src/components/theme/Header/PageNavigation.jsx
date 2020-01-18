@@ -1,18 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component, useState, useRef } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isMatch } from 'lodash';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-connect';
-import ReactDOM from 'react-dom';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
-import { getBaseUrl } from '@plone/volto/helpers';
-import { getNavigation } from '@plone/volto/actions';
 import rightKey from '@plone/volto/icons/right-key.svg';
 import { Icon } from '@plone/volto/components';
 import backIcon from '@plone/volto/icons/back.svg';
@@ -162,7 +158,7 @@ class PageNavigation extends Component {
         this.props.localnavigation.length &&
         this.props.localnavigation.filter(item => item.title !== 'Home')) ||
       [];
-    console.log('localnavigation', this.props.localnavigation);
+    // console.log('localnavigation', this.props.localnavigation);
     if (!this.props.items || !this.props.items.length) return '';
     return (
       <React.Fragment>
@@ -228,6 +224,7 @@ class PageNavigation extends Component {
                   {item.items && item.items.length ? (
                     <React.Fragment>
                       <a
+                        tabIndex={-1}
                         role="button"
                         onClick={ev =>
                           this.setSubmenu(item.title, item.items, ev)
@@ -372,6 +369,7 @@ class PageNavigation extends Component {
                 >
                   {item.items && item.items.length ? (
                     <a
+                      tabIndex={-1}
                       role="button"
                       onClick={ev =>
                         this.setSubtopics(item.title, item.items, ev)
@@ -456,7 +454,7 @@ export default compose(
   connect(
     (state, props) => {
       const content = state.prefetch[props.pathname] || state.content.data;
-      console.log('nav props', content);
+      // console.log('nav props', content);
       return {
         localnavigation: content?.['@components']?.localnavigation?.items,
         items: content?.['@components']?.navigation?.items,

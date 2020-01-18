@@ -5,7 +5,7 @@ import headerImg from './topic-bg.jpg';
 import { connect } from 'react-redux';
 
 function PageHeader(props) {
-  console.log('PageHeader', props);
+  console.log('PageHeader', props.pathname);
   return (
     <React.Fragment>
       {/* <BodyClass className="homepage" /> */}
