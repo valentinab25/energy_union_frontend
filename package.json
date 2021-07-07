@@ -2,7 +2,7 @@
   "name": "energy-union-frontend",
   "description": "Volto Starter Kit",
   "license": "MIT",
-  "version": "3.1.0",
+  "version": "2.1.5-beta",
   "scripts": {
     "start": "razzle start",
     "postinstall": "yarn omelette && yarn patches",
